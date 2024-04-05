@@ -1,12 +1,15 @@
-import Image from "next/image";
 import Crud from "./Front-end/components/crud";
+import { select } from "./Back-end/crud/service";
 
-export default function Home() {
+export const dynamic = "force-dynamic" 
+
+export default async function Home() {
+
+  const data = await select()
+
   return (
     <>
-      <Crud>
-        
-      </Crud>
+      <Crud itens={data}></Crud>
     </>
   );
 }
