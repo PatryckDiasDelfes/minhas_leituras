@@ -7,9 +7,11 @@ import { Iobras, } from "@/app/types";
 export default function Crud(props:{itens:any[]}) {
 
     let [itens, setItens] = useState(props.itens)
+
+    const [modalState, setModalState] = useState()
     
     const obrasDefault = {
-        id: "",
+        id: parseInt(itens[itens.length-1]?.id) + 1 || 0,
         titulo: "",
         autor: "",
         resenha: "",
@@ -17,28 +19,36 @@ export default function Crud(props:{itens:any[]}) {
 
     const [newObra, SetNewObra] = useState(obrasDefault)
 
+    function addPost() {
+        insert({id: newObra.id, titulo: newObra.titulo})
+        setItens([...itens, newObra])
+        SetNewObra({...obrasDefault, id: parseInt(itens[itens.length-1]?.id) + 1 || 0})
+    }
+
  return(
     <>
-        <section className="flex items-center justify-center gap-10 bg-[#262626] h-screen w-screen">
-            <div className="w-[55%] h-[70%] p-6 px-8 rounded bg-[#F2F2F2]">
-                <div className="flex items-center px-6 justify-between h-[15%] rounded-lg bg-[#F25A38] bg-opacity-35">
-                    <div className="flex gap-5">
-                        {itens.map((i) => (
-                            <div className="flex gap-5">
-                                <h1>{i.titulo}</h1>
-                                <span>{i.autor}</span>
-                            </div>
-                        ))}
+        <section className="bg-[#FDF5A3] w-[100vw] h-[100vh] flex p-10">
+
+            <header className="bg-[#B4D27A] w-[150px] h-[150px] absolute top-0 right-0 flex justify-center items-center">
+                <div className="bg-red-300 w-[120px] h-[120px] rounded-full flex justify-center items-center">
+                    perfil
                 </div>
-                    <div className="flex gap-3">
-                        <p>Ja terminei?</p>
-                        <input type="checkbox" />
-                    </div>
-                </div>
-            </div>
-            <button className="bg-white p-3 rounded-xl">
-                adcionar obra
-            </button>
+            </header>
+
+            <button onClick={() => addPost()} className="bg-[#7CBB63] w-[90px] h-[60px] rounded-xl absolute top-48 right-8">add nova obra
+            <input onChange={(e) => (SetNewObra ({...newObra, titulo: e.target.value}))} type="text" className="outline" /> </button>
+
+                
+                    {itens.map((i) => (
+                        <article className="bg-[#FEF4DA] w-[212px] h-[235px] flex items-end rounded-2xl border-2 border-gray-600 ">
+                            <section key={i.id} className="bg-[#F2C894] w-[212px] h-[67px] rounded-b-[14px] flex justify-center items-center">
+                                <div>  
+                                    <h1>{i.titulo}</h1>
+                                </div>
+                            </section>
+                      </article>
+                    ))}
+
         </section>
     </>
  );
