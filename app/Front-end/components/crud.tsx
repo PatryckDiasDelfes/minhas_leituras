@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { select, insert } from "@/app/Back-end/crud/service" 
 import { Iobras, } from "@/app/types";
+import Shetet from "./Sheet";
 
 export default function Crud(props:{itens:any[]}) {
 
@@ -35,19 +36,22 @@ export default function Crud(props:{itens:any[]}) {
                 </div>
             </header>
 
-            <button onClick={() => addPost()} className="bg-[#7CBB63] w-[90px] h-[60px] rounded-xl absolute top-48 right-8">add nova obra
-            <input onChange={(e) => (SetNewObra ({...newObra, titulo: e.target.value}))} type="text" className="outline" /> </button>
-
+            <div className="outline flex-col absolute top-48 right-8">
+                <button onClick={() => addPost()} className="bg-[#7CBB63] w-[90px] h-[60px] rounded-xl">add nova obra</button>
+                <input onChange={(e) => (SetNewObra ({...newObra, titulo: e.target.value}))} type="text" className="outline" /> 
+            </div>
                 
+                <div className="grid gap-y-36 gap-x-8 grid-cols-6">
                     {itens.map((i) => (
-                        <article className="bg-[#FEF4DA] w-[212px] h-[235px] flex items-end rounded-2xl border-2 border-gray-600 ">
+                        <article className="bg-[#FEF4DA] w-[212px] h-[235px] flex items-end rounded-2xl border-2 border-gray-600">
                             <section key={i.id} className="bg-[#F2C894] w-[212px] h-[67px] rounded-b-[14px] flex justify-center items-center">
                                 <div>  
-                                    <h1>{i.titulo}</h1>
+                                    <h1>{i.titulo} - {i.id}</h1>
                                 </div>
                             </section>
                       </article>
                     ))}
+                </div>
 
         </section>
     </>
