@@ -7,5 +7,5 @@ export async function select() {
 }
 
 export async function insert(itens) {
-  return await sql`INSERT INTO obras (titulo) VALUES (${itens.titulo})` 
+  return await sql`INSERT INTO obras (titulo, id) VALUES (${itens.titulo}, ${itens.id})` 
 }

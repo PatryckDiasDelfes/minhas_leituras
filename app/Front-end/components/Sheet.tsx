@@ -5,7 +5,7 @@ import {
     SheetHeader,
     SheetTitle,
     SheetTrigger,
-  } from
+  } from "@/components/ui/sheet"
 
   export default function Shetet() {
     return (
