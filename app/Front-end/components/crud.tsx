@@ -1,13 +1,6 @@
 "use client"
 
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-  } from "@/components/ui/sheet"
+import { SheetDemo } from "./sheetDemo";
 import { useState } from "react";
 import { select, insert } from "@/app/Back-end/crud/service" 
 import { Iobras, } from "@/app/types";
@@ -33,9 +26,15 @@ export default function Crud(props:{itens:any[]}) {
         SetNewObra({...obrasDefault, id: parseInt(itens[itens.length-1]?.id) + 1 || 0})
     }
 
- return(
+    function trasInfo(manga: Iobras) {
+
+        data: titulo: newObra.titulo
+
+    }
+
+ return(    
     <>
-        <section className="bg-[#FDF5A3] w-[100vw] h-[100vh] flex p-10">
+        <section className="bg-[#FDF5A3] w-[100vw] h-screen p-10">
 
             <header className="bg-[#B4D27A] w-[150px] h-[150px] absolute top-0 right-0 flex justify-center items-center">
                 <div className="bg-red-300 w-[120px] h-[120px] rounded-full flex justify-center items-center">
@@ -44,20 +43,7 @@ export default function Crud(props:{itens:any[]}) {
             </header>
 
             <div className="outline flex-col absolute top-48 right-8">
-                <Sheet>
-                    <SheetTrigger>Open</SheetTrigger>
-                    <SheetContent>
-                        <SheetHeader>
-                            <SheetTitle>Adcione a sua leitura</SheetTitle>
-                                <SheetDescription className="">
-                                    <input onChange={(e) => SetNewObra({...newObra, titulo: e.target.value})} className="border w-full h-10 p-2" type="text" placeholder="   Obra" />
-                                </SheetDescription>
-                        </SheetHeader>
-                        <div className="flex justify-center items-end">
-                            <button onClick={() => addPost()}>add</button>
-                        </div>
-                    </SheetContent>
-                </Sheet>
+                <SheetDemo AddButtonSheets={addPost} obras={newObra.titulo}></SheetDemo>
             </div>
                 
                 <div className="w-[72.5rem] flex flex-wrap gap-x-6 gap-y-6">
