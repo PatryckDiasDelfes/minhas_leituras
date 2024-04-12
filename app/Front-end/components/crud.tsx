@@ -1,9 +1,16 @@
 "use client"
 
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+  } from "@/components/ui/sheet"
 import { useState } from "react";
 import { select, insert } from "@/app/Back-end/crud/service" 
 import { Iobras, } from "@/app/types";
-import Shetet from "./Sheet";
 
 export default function Crud(props:{itens:any[]}) {
 
@@ -37,15 +44,27 @@ export default function Crud(props:{itens:any[]}) {
             </header>
 
             <div className="outline flex-col absolute top-48 right-8">
-                <button onClick={() => addPost()} className="bg-[#7CBB63] w-[90px] h-[60px] rounded-xl">add nova obra</button>
-                <input onChange={(e) => (SetNewObra ({...newObra, titulo: e.target.value}))} type="text" className="outline" /> 
+                <Sheet>
+                    <SheetTrigger>Open</SheetTrigger>
+                    <SheetContent>
+                        <SheetHeader>
+                            <SheetTitle>Adcione a sua leitura</SheetTitle>
+                                <SheetDescription className="">
+                                    <input onChange={(e) => SetNewObra({...newObra, titulo: e.target.value})} className="border w-full h-10 p-2" type="text" placeholder="   Obra" />
+                                </SheetDescription>
+                        </SheetHeader>
+                        <div className="flex justify-center items-end">
+                            <button onClick={() => addPost()}>add</button>
+                        </div>
+                    </SheetContent>
+                </Sheet>
             </div>
                 
-                <div className="grid gap-y-36 gap-x-8 grid-cols-6">
+                <div className="w-[72.5rem] flex flex-wrap gap-x-6 gap-y-6">
                     {itens.map((i) => (
-                        <article className="bg-[#FEF4DA] w-[212px] h-[235px] flex items-end rounded-2xl border-2 border-gray-600">
-                            <section key={i.id} className="bg-[#F2C894] w-[212px] h-[67px] rounded-b-[14px] flex justify-center items-center">
-                                <div>  
+                        <article key={i.id} className="bg-[#FEF4DA] w-[212px] h-[235px] flex items-end rounded-2xl border-2 border-gray-600">
+                            <section className="bg-[#F2C894] w-[212px] h-[67px] rounded-b-[14px] flex justify-center items-center">
+                                <div> 
                                     <h1>{i.titulo} - {i.id}</h1>
                                 </div>
                             </section>
