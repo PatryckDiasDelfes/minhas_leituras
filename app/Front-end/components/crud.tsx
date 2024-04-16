@@ -43,7 +43,7 @@ export default function Crud(props:{itens:any[]}) {
             </header>
 
             <div className="outline flex-col absolute top-48 right-8">
-                <SheetDemo AddButtonSheets={addPost} obras={newObra.titulo}></SheetDemo>
+                <SheetDemo AddButtonSheets={addPost} obras={newObra}></SheetDemo>
             </div>
                 
                 <div className="w-[72.5rem] flex flex-wrap gap-x-6 gap-y-6">
